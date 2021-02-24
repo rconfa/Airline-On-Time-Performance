@@ -50,15 +50,15 @@
             },
             "dep_time": {
               "type": "string",
-              "description": "Actual Departure Time (local time). Not required in case of cancelled/diverted flight"
+              "description": "Actual Departure Time (local time). Not required only in case of cancelled/diverted flight"
             },
             "dep_delay": {
               "type": "integer",
-              "description": "Difference in minutes between scheduled and actual departure time. Early departures show negative numbers. Not required in case of cancelled/diverted flight"
+              "description": "Difference in minutes between scheduled and actual departure time. Early departures show negative numbers. Not required only in case of cancelled/diverted flight"
             },
             "dep_delay_group": {
               "type": "integer",
-              "description": "Difference in minutes between scheduled and actual departure time. Early departures set to 0. Not required in case of cancelled/diverted flight"
+              "description": "Difference in minutes between scheduled and actual departure time. Early departures set to 0. Not required only in case of cancelled/diverted flight"
             },
             "crs_arr_time": {
               "type": "string",
@@ -66,19 +66,19 @@
             },
             "arr_time": {
               "type": "string",
-              "description": "Actual Arrival Time (local time). Not required in case of cancelled/diverted flight"
+              "description": "Actual Arrival Time (local time). Not required only in case of cancelled/diverted flight"
             },
             "arr_delay": {
               "type": "integer",
-              "description": "Difference in minutes between scheduled and actual arrival time. Early departures show negative numbers. Not required in case of cancelled/diverted flight"
+              "description": "Difference in minutes between scheduled and actual arrival time. Early departures show negative numbers. Not required only in case of cancelled/diverted flight"
             },
             "arr_delay_group": {
               "type": "integer",
-              "description": "Difference in minutes between scheduled and actual arrival time. Early arrivals  set to 0. Not required in case of cancelled/diverted flight"
+              "description": "Difference in minutes between scheduled and actual arrival time. Early arrivals  set to 0. Not required only in case of cancelled/diverted flight"
             },
             "cancelled": {
               "type": "boolean",
-              "description": "Cancelled Flight Indicator (1=Yes)"
+              "description": "Cancelled Flight Indicator. Must be false if diverted is true."
             },
             "cancellation_code": {
               "type": "string",
@@ -86,39 +86,39 @@
             },
             "diverted": {
               "type": "boolean",
-              "description": "diverted Flight Indicator (1=Yes)"
+              "description": "diverted Flight Indicator. Must be false if cancelled is true."
             },
             "crs_elapsed_time": {
               "type": "integer",
-              "description": "CRS Elapsed Time of Flight, in Minutes"
+              "description": "CRS Elapsed Time of Flight, in Minutes."
             },
             "actual_elapsed_time": {
               "type": "integer",
-              "description": "Real elapsed Time of Flight, in Minutes."
+              "description": "Real elapsed Time of Flight, in Minutes. Not required only in case of cancelled/diverted flight"
             },
             "air_time": {
               "type": "integer",
-              "description": "Flight Time, in Minutes"
+              "description": "Flight Time, in Minutes. Not required only in case of cancelled/diverted flight"
             },
             "carrier_delay": {
               "type": "integer",
-              "description": "Carrier Delay, in Minutes."
+              "description": "Carrier Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
             },
             "weather_delay": {
               "type": "integer",
-              "description": "Weather Delay, in Minutes"
+              "description": "Weather Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
             },
             "nas_delay": {
               "type": "integer",
-              "description": "National Air System Delay, in Minutes"
+              "description": "National Air System Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
             },
             "security_delay": {
               "type": "integer",
-              "description": "Security Delay, in Minutes"
+              "description": "Security Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
             },
             "late_aircraft_delay": {
               "type": "integer",
-              "description": "Late Aircraft Delay, in Minutes "
+              "description": "Late Aircraft Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
             }
           },
           "required": [
