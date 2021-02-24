@@ -129,8 +129,10 @@
             "diverted",
             "crs_elapsed_time"
           ],
+          // check dependencies throws properties
           "allOf": [
             {
+            	//1) cancellation_code is allowed only if cancelled is true
               "dependencies": {
                 "cancellation_code": {
                   "properties": {
@@ -144,6 +146,7 @@
               }
             },
             {
+				//2) Diverted and cancelled are mutally exclusive 
               "if": {
                 "properties": {
                   "diverted": {
@@ -160,6 +163,7 @@
               }
             },
             {
+				//3) If cancelled is true "cancellation_code" must be added	
               "if": {
                 "properties": {
                   "cancelled": {
@@ -168,12 +172,11 @@
                 }
               },
               "then": {
-                "required": [
-                  "cancellation_code"
-                ]
+                "required": ["cancellation_code"]
               }
             },
             {
+				//4) If Diverted and cancelled are both false real time of departure and arrival must be added, otherwise must be nul
               "if": {
                 "allOf": [
                   {
@@ -218,6 +221,7 @@
                 }
               }
             },
+				//5) If the delay on arrival is grater than 14 information about delay must be added, otherwise must be null           
             {
               "if": {
                 "properties": {
