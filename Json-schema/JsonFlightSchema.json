@@ -18,11 +18,11 @@
     },
     "origin": {
       "description": "Iata code for departure airport",
-      "$ref": "./JsonAirportSchema.json#/properties/IATA"
+      "$ref": "JsonAirportSchema.json#/properties/IATA"
     },
     "destination": {
       "description": "Iata code for arrivals airport",
-      "$ref": "./JsonAirportSchema.json#/properties/IATA",
+      "$ref": "JsonAirportSchema.json#/properties/IATA"
     },
     "distance": {
       "type": "integer",
@@ -42,7 +42,7 @@
           "properties": {
             "airline": {
               "description": "Iata code for airlines",
-      		  "$ref": "./JsonAirlineSchema.json#/properties/IATA",
+      		  "$ref": "JsonAirlineSchema.json#/properties/IATA"
             },
             "crs_dep_time": {
               "type": "string",
