@@ -17,12 +17,12 @@
       "description": "day of week of the flight"
     },
     "origin": {
-      "type": "string",
-      "description": "Iata code for departure airport"
+      "description": "Iata code for departure airport",
+      "$ref": "./JsonAirportSchema.json#/properties/IATA"
     },
     "destination": {
-      "type": "string",
-      "description": "Iata code for arrivals airport"
+      "description": "Iata code for arrivals airport",
+      "$ref": "./JsonAirportSchema.json#/properties/IATA",
     },
     "distance": {
       "type": "integer",
@@ -41,8 +41,8 @@
           "type": "object",
           "properties": {
             "airline": {
-              "type": "string",
-              "description": "Iata code for airlines"
+              "description": "Iata code for airlines",
+      		  "$ref": "./JsonAirlineSchema.json#/properties/IATA",
             },
             "crs_dep_time": {
               "type": "string",
