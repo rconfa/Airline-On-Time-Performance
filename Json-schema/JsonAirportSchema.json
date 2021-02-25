@@ -1,0 +1,86 @@
+{
+  "properties": {
+    "IATA": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "Unique IATA code for the airport"
+    },
+    "ICAO": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "Unique ICAO code for the airport"
+    },
+    "type": {
+      "type": "string",
+      "description": "Airport's type",
+      "enum": [
+        "heliport",
+        "small_airport",
+        "closed",
+        "medium_airport",
+        "large_airport"
+      ]
+    },
+    "elevation_ft": {
+      "type": "integer",
+      "description": "Airport's elevation"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Airport's latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Airport's longitude"
+    },
+    "city_name": {
+      "type": "string",
+      "description": "Airport's City"
+    },
+    "state_name": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Airport's State"
+    },
+    "state_code": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "description": "Airport's State"
+    },
+    "num_passengers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "reference year"
+          },
+          "total_passengers": {
+            "type": "integer",
+            "description": "Ariport's number of passengers"
+          }
+        },
+        "required": [
+          "year",
+          "total_passengers"
+        ]
+      }
+    }
+  },
+  "required": [
+    "IATA",
+    "type",
+    "elevation_ft",
+    "latitude",
+    "longitude",
+    "city_name",
+    "state_name",
+    "state_code"
+  ],
+  "additionalProperties": false
+}
