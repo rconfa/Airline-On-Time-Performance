@@ -31,7 +31,7 @@
           "maxLength": 4,
           "description": "Unique ICAO code for the airport"
         },
-        "name":{
+        "name": {
           "type": "string",
           "minLength": 2,
           "description": "Name of the airport"
@@ -134,7 +134,7 @@
           "maxLength": 4,
           "description": "Unique ICAO code for the airport"
         },
-        "name":{
+        "name": {
           "type": "string",
           "minLength": 2,
           "description": "Name of the airport"
@@ -180,32 +180,31 @@
         "num_passengers": {
           "type": "array",
           "uniqueItems": true,
-          "type": "object",
-            "properties": {
-              "year": {
-                "type": "integer",
-                "description": "reference year"
-              },
-              "world_ranking": {
-                "type": "integer",
-                "description": "world ranking of the airport for the reference year"
-              },
-              "total_passengers": {
-                "type": "integer",
-                "description": "Airport's number of passengers"
-              },
-              "growth_percent": {
-                "type": "number",
-                "description": "Airport's percentage of growth compared to the previous year"
-              }
+          "properties": {
+            "year": {
+              "type": "integer",
+              "description": "reference year"
             },
-            "required": [
-              "year",
-              "world_ranking",
-              "total_passengers",
-              "growth_percent"
-            ]
-          }
+            "world_ranking": {
+              "type": "integer",
+              "description": "world ranking of the airport for the reference year"
+            },
+            "total_passengers": {
+              "type": "integer",
+              "description": "Airport's number of passengers"
+            },
+            "growth_percent": {
+              "type": "number",
+              "description": "Airport's percentage of growth compared to the previous year"
+            }
+          },
+          "required": [
+            "year",
+            "world_ranking",
+            "total_passengers",
+            "growth_percent"
+          ]
+        }
       },
       "required": [
         "ICAO",
