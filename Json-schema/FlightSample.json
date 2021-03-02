@@ -1,0 +1,468 @@
+{
+  "properties": {
+    "year": {
+      "type": "integer",
+      "description": "reference year of the flight"
+    },
+    "month": {
+      "type": "integer",
+      "description": "reference month of the flight"
+    },
+    "day_of_week": {
+      "type": "integer",
+      "description": "day of week of the flight"
+    },
+    "origin": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "Unique IATA code for the departures airport"
+    },
+    "origin_info": {
+      "type": "object",
+      "properties": {
+        "ICAO": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4,
+          "description": "Unique ICAO code for the airport"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Name of the airport"
+        },
+        "type": {
+          "type": "string",
+          "description": "Airport's type",
+          "enum": [
+            "heliport",
+            "small_airport",
+            "closed",
+            "medium_airport",
+            "large_airport"
+          ]
+        },
+        "elevation_ft": {
+          "type": "integer",
+          "description": "Airport's elevation"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Airport's latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Airport's longitude"
+        },
+        "city_name": {
+          "type": "string",
+          "description": "Airport's City"
+        },
+        "state_name": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Airport's State"
+        },
+        "state_code": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "description": "Airport's State"
+        },
+        "num_passengers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "integer",
+                "description": "reference year"
+              },
+              "world_ranking": {
+                "type": "integer",
+                "description": "world ranking of the airport for the reference year"
+              },
+              "total_passengers": {
+                "type": "integer",
+                "description": "Airport's number of passengers"
+              },
+              "growth_percent": {
+                "type": "number",
+                "description": "Airport's percentage of growth compared to the previous year"
+              }
+            },
+            "required": [
+              "year",
+              "world_ranking",
+              "total_passengers",
+              "growth_percent"
+            ]
+          }
+        }
+      },
+      "required": [
+        "ICAO",
+        "name",
+        "type",
+        "elevation_ft",
+        "latitude",
+        "longitude",
+        "city_name",
+        "state_name",
+        "state_code"
+      ],
+      "additionalProperties": false
+    },
+    "destination": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "Unique IATA code for the arrivals airport"
+    },
+    "destination_info": {
+      "type": "object",
+      "properties": {
+        "ICAO": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4,
+          "description": "Unique ICAO code for the airport"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Name of the airport"
+        },
+        "type": {
+          "type": "string",
+          "description": "Airport's type",
+          "enum": [
+            "heliport",
+            "small_airport",
+            "closed",
+            "medium_airport",
+            "large_airport"
+          ]
+        },
+        "elevation_ft": {
+          "type": "integer",
+          "description": "Airport's elevation"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Airport's latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Airport's longitude"
+        },
+        "city_name": {
+          "type": "string",
+          "description": "Airport's City"
+        },
+        "state_name": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Airport's State"
+        },
+        "state_code": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "description": "Airport's State"
+        },
+        "num_passengers": {
+          "type": "array",
+          "uniqueItems": true,
+          "properties": {
+            "year": {
+              "type": "integer",
+              "description": "reference year"
+            },
+            "world_ranking": {
+              "type": "integer",
+              "description": "world ranking of the airport for the reference year"
+            },
+            "total_passengers": {
+              "type": "integer",
+              "description": "Airport's number of passengers"
+            },
+            "growth_percent": {
+              "type": "number",
+              "description": "Airport's percentage of growth compared to the previous year"
+            }
+          },
+          "required": [
+            "year",
+            "world_ranking",
+            "total_passengers",
+            "growth_percent"
+          ]
+        }
+      },
+      "required": [
+        "ICAO",
+        "name",
+        "type",
+        "elevation_ft",
+        "latitude",
+        "longitude",
+        "city_name",
+        "state_name",
+        "state_code"
+      ],
+      "additionalProperties": false
+    },
+    "distance": {
+      "type": "integer",
+      "description": "Distance between departure and arrivals airport"
+    },
+    "distance_group": {
+      "type": "integer",
+      "description": "Distance interval between departure and arrival airports, every 250 miles"
+    },
+    "flights": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "day_of_month": {
+            "type": "integer",
+            "description": "day of month of the flight"
+          },
+          "airline": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "description": "Unique IATA code for the airlines"
+          },
+          "airline_name": {
+            "type": "string",
+            "minLength": 2,
+            "description": "Airlines's name"
+          },
+          "crs_dep_time": {
+            "type": "integer",
+            "description": "CRS Departure Time (local time of departures)"
+          },
+          "dep_time": {
+            "type": "integer",
+            "description": "Actual Departure Time (local time). Not required only in case of cancelled/diverted flight"
+          },
+          "dep_delay": {
+            "type": "integer",
+            "description": "Difference in minutes between scheduled and actual departure time. Early departures show negative numbers. Not required only in case of cancelled/diverted flight"
+          },
+          "dep_delay_group": {
+            "type": "integer",
+            "description": "Difference in minutes between scheduled and actual departure time. Early departures set to 0. Not required only in case of cancelled/diverted flight"
+          },
+          "crs_arr_time": {
+            "type": "integer",
+            "description": "CRS Arrival Time (local time of arrivals)"
+          },
+          "arr_time": {
+            "type": "integer",
+            "description": "Actual Arrival Time (local time). Not required only in case of cancelled/diverted flight"
+          },
+          "arr_delay": {
+            "type": "integer",
+            "description": "Difference in minutes between scheduled and actual arrival time. Early departures show negative numbers. Not required only in case of cancelled/diverted flight"
+          },
+          "arr_delay_group": {
+            "type": "integer",
+            "description": "Difference in minutes between scheduled and actual arrival time. Early arrivals  set to 0. Not required only in case of cancelled/diverted flight"
+          },
+          "cancelled": {
+            "type": "boolean",
+            "description": "Cancelled Flight Indicator. Must be false if diverted is true."
+          },
+          "cancellation_code": {
+            "type": "string",
+            "description": "Specifies The Reason For Cancellation. Required only if cancelled is true"
+          },
+          "diverted": {
+            "type": "boolean",
+            "description": "diverted Flight Indicator. Must be false if cancelled is true."
+          },
+          "crs_elapsed_time": {
+            "type": "integer",
+            "description": "CRS Elapsed Time of Flight, in Minutes."
+          },
+          "actual_elapsed_time": {
+            "type": "integer",
+            "description": "Real elapsed Time of Flight, in Minutes. Not required only in case of cancelled/diverted flight"
+          },
+          "air_time": {
+            "type": "integer",
+            "description": "Flight Time, in Minutes. Not required only in case of cancelled/diverted flight"
+          },
+          "carrier_delay": {
+            "type": "integer",
+            "description": "Carrier Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
+          },
+          "weather_delay": {
+            "type": "integer",
+            "description": "Weather Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
+          },
+          "nas_delay": {
+            "type": "integer",
+            "description": "National Air System Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
+          },
+          "security_delay": {
+            "type": "integer",
+            "description": "Security Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
+          },
+          "late_aircraft_delay": {
+            "type": "integer",
+            "description": "Late Aircraft Delay, in Minutes. Not required in case of cancelled/diverted flight or if arr_delay is less then 15 minutes"
+          }
+        },
+        "required": [
+          "day_of_month",
+          "airline",
+          "crs_dep_time",
+          "crs_arr_time",
+          "cancelled",
+          "diverted",
+          "crs_elapsed_time"
+        ],
+        "allOf": [
+          {
+            "dependencies": {
+              "cancellation_code": {
+                "properties": {
+                  "cancelled": {
+                    "enum": [
+                      true
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "diverted": {
+                  "const": true
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "cancelled": {
+                  "const": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "cancelled": {
+                  "const": true
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "cancellation_code"
+              ]
+            }
+          },
+          {
+            "if": {
+              "allOf": [
+                {
+                  "properties": {
+                    "cancelled": {
+                      "const": false
+                    },
+                    "diverted": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "required": [
+                "dep_time",
+                "dep_delay",
+                "dep_delay_group",
+                "arr_time",
+                "arr_delay",
+                "arr_delay_group",
+                "actual_elapsed_time",
+                "air_time"
+              ]
+            },
+            "else": {
+              "properties": {
+                "dep_time": false,
+                "dep_delay": false,
+                "dep_delay_group": false,
+                "arr_time": false,
+                "arr_delay": false,
+                "arr_delay_group": false,
+                "actual_elapsed_time": false,
+                "air_time": false,
+                "carrier_delay": false,
+                "weather_delay": false,
+                "nas_delay": false,
+                "security_delay": false,
+                "late_aircraft_delay": false
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [ "arr_delay" ],
+              "properties": {
+                "arr_delay": {
+                  "minimum": 14,
+                  "exclusiveMinimum": true
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "late_aircraft_delay",
+                "security_delay",
+                "nas_delay",
+                "weather_delay",
+                "carrier_delay"
+              ]
+            },
+            "else": {
+              "properties": {
+                "carrier_delay": false,
+                "weather_delay": false,
+                "nas_delay": false,
+                "security_delay": false,
+                "late_aircraft_delay": false
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "year",
+    "month",
+    "day_of_week",
+    "origin",
+    "origin_info",
+    "destination",
+    "destination_info",
+    "distance_group",
+    "distance"
+  ]
+}
