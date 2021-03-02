@@ -246,11 +246,11 @@
             "description": "Airlines's name"
           },
           "crs_dep_time": {
-            "type": "string",
+            "type": "integer",
             "description": "CRS Departure Time (local time of departures)"
           },
           "dep_time": {
-            "type": "string",
+            "type": "integer",
             "description": "Actual Departure Time (local time). Not required only in case of cancelled/diverted flight"
           },
           "dep_delay": {
@@ -262,11 +262,11 @@
             "description": "Difference in minutes between scheduled and actual departure time. Early departures set to 0. Not required only in case of cancelled/diverted flight"
           },
           "crs_arr_time": {
-            "type": "string",
+            "type": "integer",
             "description": "CRS Arrival Time (local time of arrivals)"
           },
           "arr_time": {
-            "type": "string",
+            "type": "integer",
             "description": "Actual Arrival Time (local time). Not required only in case of cancelled/diverted flight"
           },
           "arr_delay": {
@@ -324,6 +324,7 @@
         },
         "required": [
           "airline",
+          "day_of_month",
           "crs_dep_time",
           "crs_arr_time",
           "cancelled",
@@ -422,7 +423,9 @@
           /*5) If the delay on arrival is grater than 14 information about delay must be added, otherwise must be null           */,
           {
             "if": {
-           	  "required": [ "arr_delay" ],
+              "required": [
+                "arr_delay"
+              ],
               "properties": {
                 "arr_delay": {
                   "minimum": 14,
@@ -457,7 +460,6 @@
   "required": [
     "year",
     "month",
-    "day_of_month",
     "day_of_week",
     "origin",
     "origin_info",
