@@ -8,10 +8,7 @@
       "type": "integer",
       "description": "reference month of the flight"
     },
-    "day_of_month": {
-      "type": "integer",
-      "description": "day of month of the flight"
-    },
+    
     "day_of_week": {
       "type": "integer",
       "description": "day of week of the flight"
@@ -234,6 +231,10 @@
       "items": {
         "type": "object",
         "properties": {
+          "day_of_month": {
+            "type": "integer",
+            "description": "day of month of the flight"
+          },
           "airline": {
             "type": "string",
             "minLength": 2,
@@ -323,15 +324,16 @@
           }
         },
         "required": [
+          "day_of_month",
           "airline",
           "crs_dep_time",
           "crs_arr_time",
           "cancelled",
           "diverted",
           "crs_elapsed_time"
-        ]/* check dependencies throws properties*/,
+        ],
         "allOf": [
-          {/*1) cancellation_code is allowed only if cancelled is true*/
+          {
             "dependencies": {
               "cancellation_code": {
                 "properties": {
@@ -344,7 +346,7 @@
               }
             }
           },
-          {/*2) Diverted and cancelled are mutally exclusive */
+          {
             "if": {
               "properties": {
                 "diverted": {
@@ -360,7 +362,7 @@
               }
             }
           },
-          {/*3) If cancelled is true "cancellation_code" must be added	*/
+          {
             "if": {
               "properties": {
                 "cancelled": {
@@ -374,7 +376,7 @@
               ]
             }
           },
-          {/*4) If Diverted and cancelled are both false real time of departure and arrival must be added, otherwise must be nul*/
+          {
             "if": {
               "allOf": [
                 {
@@ -419,7 +421,7 @@
               }
             }
           }
-          /*5) If the delay on arrival is grater than 14 information about delay must be added, otherwise must be null           */,
+         ,
           {
             "if": {
               "properties": {
@@ -456,7 +458,6 @@
   "required": [
     "year",
     "month",
-    "day_of_month",
     "day_of_week",
     "origin",
     "origin_info",
