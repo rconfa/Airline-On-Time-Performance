@@ -1,0 +1,75 @@
+{
+  "year": 2018,
+  "month": 1,
+  "day_of_week": 1,
+  "origin": "AVP",
+  "origin_info": {
+    "ICAO": "KAVP",
+    "name": "Wilkes Barre Scranton International Airport",
+    "type": "medium_airport",
+    "elevation_ft": 962.0,
+    "latitude": 41.338500976599995,
+    "longitude": -75.723396301300014,
+    "city_name": "Scranton/Wilkes-Barre",
+    "state_name": "Pennsylvania",
+    "state_code": "PA"
+  },
+  "destination": "EWR",
+  "destination_info": {
+    "ICAO": "KEWR",
+    "name": "Newark Liberty International Airport",
+    "type": "large_airport",
+    "elevation_ft": 18.0,
+    "latitude": 40.692501068115234,
+    "longitude": -74.168701171875,
+    "city_name": "Newark",
+    "state_name": "New Jersey",
+    "state_code": "NJ",
+    "num_passengers": [
+      {
+        "year": 2018,
+        "world_ranking": 40,
+        "total_passengers": 45851434,
+        "growth_percent": 6.0825385643661578
+      }
+    ]
+  },
+  "distance": 93,
+  "distance_group": 1,
+  "flights": [
+    {
+      "day_of_month": 1,
+      "airline": "EV",
+      "airline_name": "Atlantic Southeast Airlines",
+      "crs_dep_time": 1825,
+      "dep_time": 2011,
+      "dep_delay": 106,
+      "dep_delay_group": 7,
+      "crs_arr_time": 1937,
+      "arr_time": 2203,
+      "arr_delay": 146,
+      "arr_delay_group": 9,
+      "cancelled": false,
+      "diverted": false,
+      "crs_elapsed_time": 72,
+      "actual_elapsed_time": 112,
+      "air_time": 35,
+      "carrier_delay": 39,
+      "weather_delay": 0,
+      "nas_delay": 40,
+      "security_delay": 0,
+      "late_aircraft_delay": 67
+    },
+    {
+      "day_of_month": 8,
+      "airline": "EV",
+      "airline_name": "Atlantic Southeast Airlines",
+      "crs_dep_time": 1810,
+      "crs_arr_time": 1920,
+      "cancelled": true,
+      "cancellation_code": "C",
+      "diverted": false,
+      "crs_elapsed_time": 70
+    }
+  ]
+}
