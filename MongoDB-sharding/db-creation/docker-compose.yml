@@ -1,17 +1,6 @@
 version: '3'
 services:
-  jupyter-lab:
-    image: jupyter/datascience-notebook:1386e2046833
-    container_name: jupyter-lab
-    environment:
-      JUPYTER_ENABLE_LAB: "yes"
-      RESTARTABLE: "yes"
-    ports:
-      - "8888:8888"
-    volumes:
-      - jupyter-lab:/home/jovyan/work
-      - ~/my-data:/data/my-data
-      
+     
 # First Shard Cluster
 
   mongoshard11:
@@ -184,4 +173,3 @@ volumes:
   shard_c1:
   shard_c2:
   shard_c3:
-  jupyter-lab:
