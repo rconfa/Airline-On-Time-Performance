@@ -2,7 +2,7 @@
 Nel [file excel](.//execution-time.xlsx) si possono vedere i risultati del caricamento dei dati su MongoDB con le relative percentuali e numero di documenti caricati in ogni shard passo passo.
 \'E anche possibile verificare il tempo di esecuzione di quattro differenti query anch'esse eseguite passo passo durante il caricamento.
 
-> Gli stessi risultati possono essere visti nel formato [pdf](.//execution-time.pdf)
+> Gli stessi risultati possono essere visti nel formato [pdf](.//execution-time.pdf).
 
 # Query eseguite
 Sono state eseguite quattro differenti tipologie di query per verificare il tempo di esecuzione durante il caricamento: 
