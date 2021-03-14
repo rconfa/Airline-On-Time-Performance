@@ -1,0 +1,187 @@
+version: '3'
+services:
+  jupyter-lab:
+    image: jupyter/datascience-notebook:1386e2046833
+    container_name: jupyter-lab
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      RESTARTABLE: "yes"
+    ports:
+      - "8888:8888"
+    volumes:
+      - jupyter-lab:/home/jovyan/work
+      - ~/my-data:/data/my-data
+      
+# First Shard Cluster
+
+  mongoshard11:
+    build:
+      context: build/replicaset
+    container_name: mongoshard11
+    depends_on:
+      - mongoshard12
+      - mongoshard13
+    command: mongod --shardsvr --replSet shard1 --dbpath /data/db --port 27017 --bind_ip_all
+    environment:
+      - REPLICA_SET=shard1
+    expose:
+      - "27017"
+    volumes:
+      - shard_d11:/data/db
+  mongoshard12:
+    image: mongo
+    container_name: mongoshard12
+    command: mongod --shardsvr --replSet shard1 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d12:/data/db
+  mongoshard13:
+    image: mongo
+    container_name: mongoshard13
+    command: mongod --shardsvr --replSet shard1 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d13:/data/db
+
+# Second Shard Cluster
+
+  mongoshard21:
+    build:
+      context: build/replicaset
+    container_name: mongoshard21
+    depends_on:
+      - mongoshard22
+      - mongoshard23
+    command: mongod --shardsvr --replSet shard2 --dbpath /data/db --port 27017 --bind_ip_all
+    environment:
+      - REPLICA_SET=shard2
+    expose:
+      - "27017"
+    volumes:
+      - shard_d21:/data/db
+  mongoshard22:
+    image: mongo
+    container_name: mongoshard22
+    command: mongod --shardsvr --replSet shard2 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d22:/data/db
+  mongoshard23:
+    image: mongo
+    container_name: mongoshard23
+    command: mongod --shardsvr --replSet shard2 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d23:/data/db      
+    
+# Third Shard Cluster
+
+  mongoshard31:
+    build:
+      context: build/replicaset
+    container_name: mongoshard31
+    depends_on:
+      - mongoshard32
+      - mongoshard33
+    command: mongod --shardsvr --replSet shard3 --dbpath /data/db --port 27017 --bind_ip_all
+    environment:
+      - REPLICA_SET=shard3
+    expose:
+      - "27017"
+    volumes:
+      - shard_d31:/data/db
+  mongoshard32:
+    image: mongo
+    container_name: mongoshard32
+    command: mongod --shardsvr --replSet shard3 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d32:/data/db
+  mongoshard33:
+    image: mongo
+    container_name: mongoshard33
+    command: mongod --shardsvr --replSet shard3 --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_d33:/data/db    
+      
+# Config Cluster
+    
+  mongocfg1:
+    build:
+      context: build/replicaset
+    container_name: mongocfg1
+    depends_on:
+      - mongocfg2
+      - mongocfg3
+    command: mongod --configsvr --replSet cfg --dbpath /data/db --port 27017 --bind_ip_all
+    environment:
+      - REPLICA_SET=cfg
+    expose:
+      - "27017"
+    volumes:
+      - shard_c1:/data/db
+  mongocfg2:
+    image: mongo
+    container_name: mongocfg2
+    command: mongod --configsvr --replSet cfg --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_c2:/data/db
+  mongocfg3:
+    image: mongo
+    container_name: mongocfg3 
+    command: mongod --configsvr --replSet cfg --dbpath /data/db --port 27017 --bind_ip_all
+    expose:
+      - "27017"
+    volumes:
+      - shard_c3:/data/db      
+
+# Build mongos Router
+
+  mongos1:
+    build:
+      context: build/router
+    container_name: mongos1
+    depends_on:
+      - mongocfg1
+      - mongocfg2
+      - mongocfg3
+      - mongoshard11
+      - mongoshard12
+      - mongoshard13
+      - mongoshard21
+      - mongoshard22
+      - mongoshard23
+      - mongoshard31
+      - mongoshard32
+      - mongoshard33
+    command: mongos --configdb cfg/mongocfg1:27017,mongocfg2:27017,mongocfg3:27017 --port 27017 --bind_ip_all
+    environment: #we can specify only the primary node for each cluster shard, other nodes will appear automatically
+      - SHARDS=shard1/mongoshard11;shard2/mongoshard21;shard3/mongoshard31
+    ports:
+      - 27027:27017
+    expose:
+      - "27017"
+      
+volumes:
+  shard_d11:
+  shard_d12:
+  shard_d13:
+  shard_d21:
+  shard_d22:
+  shard_d23:
+  shard_d31:
+  shard_d32:
+  shard_d33:
+  shard_c1:
+  shard_c2:
+  shard_c3:
+  jupyter-lab:
