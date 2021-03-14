@@ -1,4 +1,6 @@
 # MongoDB Sharding with Docker
+>The italian version of this file can be found [here](./README_ItalianVersion.md)
+
 The idea is to create a sharded cluster in mongodb. In particular, given the volume of data processed in our case (>4GB), we want to create three different zoned-based shards in which loads  the data. The shards will contain a specific set of data:
 - **Shard1**: it will contain the data for the months between January and April
 - **Shard2**: it will contain the data for the months between May and August
