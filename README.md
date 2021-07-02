@@ -17,7 +17,7 @@ The project was carried out with the use of Python for implementing the scriptin
   * [File](./CSV-File): Contains all files used in this project, either for data management part or data visualization part.
   * [Sharding](./MongoDB-sharding): Contains the docker compose used for building shard in MongoDB and a report of the execution time got for four different queries during the uploading. It also contains the description of the sharding strategy that we have used.
   * [Json](./Json-schema): Contains schema for json files and some sample files.
-
+  * [Visualization] (./Visualization): Contains the Tableau project file and dashboard images exported in png format.
 ## About us
 
 #### Riccardo Confalonieri - Data Science Student @ University of Milano-Bicocca
